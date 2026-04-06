@@ -15,11 +15,11 @@ class YourCartPage extends Main {
         return $('#checkout');
     }
 
-    async startContinueShopping () {;
+    async startContinueShopping () {
         await this.buttonContinueShopping.click();
     }
 
-    async startCheckout () {;
+    async startCheckout () {
         await this.buttonCheckout.click();
     }
 

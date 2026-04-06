@@ -64,18 +64,18 @@ describe('Burger Menu', () => {
 //     })
 // 
 //YC04
-    for (const product of ProductsPage.listProducts) {
-        it(`blah for ${product}`, async() => {
+        it(`should be able to add each product to the cart`, async() => {
             await expect(ProductsPage.visualCartBadge).not.toBeDisplayed()
-            await ProductsPage.startAddToCart(product)
-            await expect(buttonAddToCart(product)).not.toBeDisplayed()
-            await expect(buttonRemove(product)).toBeDisplayed()
-            await expect(ProductsPage.visualCartBadge(ProductsPage.listProducts[product++])).toBeDisplayed()
+            for (let i = 0; i < ProductsPage.listProducts.length; i++) {
+                await ProductsPage.startAddToCart(ProductsPage.listProducts[i])
+                await expect(ProductsPage.buttonAddToCart(ProductsPage.listProducts[i])).not.toBeDisplayed()
+                await expect(ProductsPage.buttonRemove(ProductsPage.listProducts[i])).toBeDisplayed()
+                await expect(ProductsPage.visualCartBadge).toHaveText(`${i + 1}`)
+            }
             await ProductsPage.startCart()
             await expect(YourCartPage.cardProduct).toBeDisplayed()
             await YourCartPage.startContinueShopping()
         })
-    }
 
 // //YC05
 //     it('', async() => {

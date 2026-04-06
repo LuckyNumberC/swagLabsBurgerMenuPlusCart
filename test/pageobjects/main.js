@@ -49,11 +49,11 @@ export default class Main {
     listProducts = ['sauce-labs-backpack', 'sauce-labs-bike-light', 'sauce-labs-bolt-t-shirt', 'sauce-labs-fleece-jacket', 'sauce-labs-onesie', 'test.allthethings()-t-shirt-(red)'];
 
     buttonAddToCart (product) {
-        return $(`#add-to-cart-${product}`);
+        return $(`[id='add-to-cart-${product}']`);
     }
 
     buttonRemove (product) {
-        return $(`#remove-${product}`);
+        return $(`[id='remove-${product}']`);
     }
 
     async viewBurgerMenu () {

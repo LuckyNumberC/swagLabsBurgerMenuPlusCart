@@ -38,8 +38,12 @@ export default class Main {
         return $('#shopping_cart_container');
     }
 
-    get visualBadge () {
+    get visualCartBadge () {
         return $('.shopping_cart_badge');
+    }
+
+    get cardProduct () {
+        return $('.cart_item');
     }
 
     listProducts = ['sauce-labs-backpack', 'sauce-labs-bike-light', 'sauce-labs-bolt-t-shirt', 'sauce-labs-fleece-jacket', 'sauce-labs-onesie', 'test.allthethings()-t-shirt-(red)'];
@@ -56,23 +60,23 @@ export default class Main {
         await this.buttonBurgerMenu.click();
     }
 
-    async startBurgerMenuExit () {;
+    async startBurgerMenuExit () {
         await this.buttonBurgerMenuExit.click();
     }
 
-    async startAllItems () {;
+    async startAllItems () {
         await this.buttonAllItems.click();
     }
 
-    async startAbout () {;
+    async startAbout () {
         await this.buttonAbout.click();
     }
 
-    async startLogout () {;
+    async startLogout () {
         await this.buttonLogout.click();
     }
 
-    async startResetAppState () {;
+    async startResetAppState () {
         await this.buttonResetAppState.click();
     }
 

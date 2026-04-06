@@ -4,7 +4,7 @@ import ProductsPage from '../pageobjects/pageProducts.js'
 import YourCartPage from '../pageobjects/pageYourCart.js'
 
 describe('Burger Menu', () => {
-
+    //Open and login
     beforeEach(async() => {
         await LoginPage.open()
         await LoginPage.startLogin('standard_user', 'secret_sauce')
@@ -12,71 +12,114 @@ describe('Burger Menu', () => {
         await expect(ProductsPage.buttonBurgerMenu).toBeDisplayed()
     })
 
-//BM01
-    it('should display all menu buttons when clicked', async () => {
-        await ProductsPage.viewBurgerMenu()
-        await expect(ProductsPage.cardMenu).toBeDisplayed()
-        await expect(ProductsPage.buttonBurgerMenuExit).toBeDisplayed()
-        await expect(ProductsPage.buttonAllItems).toBeDisplayed()
-        await expect(ProductsPage.buttonAbout).toBeDisplayed()
-        await expect(ProductsPage.buttonLogout).toBeDisplayed()
-        await expect(ProductsPage.buttonResetAppState).toBeDisplayed()
-    })
+// //BM01
+//     it('should display all menu buttons when clicked', async () => {
+//         await ProductsPage.viewBurgerMenu()
+//         await expect(ProductsPage.cardMenu).toBeDisplayed()
+//         await expect(ProductsPage.buttonBurgerMenuExit).toBeDisplayed()
+//         await expect(ProductsPage.buttonAllItems).toBeDisplayed()
+//         await expect(ProductsPage.buttonAbout).toBeDisplayed()
+//         await expect(ProductsPage.buttonLogout).toBeDisplayed()
+//         await expect(ProductsPage.buttonResetAppState).toBeDisplayed()
+//     })
 
-//BM04
-    it('should navigate to the Products page when All Items is clicked', async() => {
-        await ProductsPage.startCart()
-        await expect(YourCartPage.titleYourCart).toBeDisplayed()
-        await YourCartPage.viewBurgerMenu()
-        await expect(YourCartPage.cardMenu).toBeDisplayed()
-        await YourCartPage.startAllItems()
-        await expect(ProductsPage.titleProducts).toBeDisplayed()
-    })
+// //BM04
+//     it('should navigate to the Products page when All Items is clicked', async() => {
+//         await ProductsPage.startCart()
+//         await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//         await YourCartPage.viewBurgerMenu()
+//         await expect(YourCartPage.cardMenu).toBeDisplayed()
+//         await YourCartPage.startAllItems()
+//         await expect(ProductsPage.titleProducts).toBeDisplayed()
+//     })
 
-//BM07
-    it('should clear all cart items when Reset App State is clicked', async() => {
-////////////////////
-    })
+// //BM07
+//     it('should clear all cart items when Reset App State is clicked', async() => {
+//         await ProductsPage.startAddToCart(ProductsPage.listProducts[0])
+//         await expect(YourCartPage.visualCartBadge).toBeDisplayed()
+//         await ProductsPage.startCart()
+//         await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//         await YourCartPage.viewBurgerMenu()
+//         await expect(YourCartPage.cardMenu).toBeDisplayed()
+//         await YourCartPage.startResetAppState()
+//         await expect(YourCartPage.visualCartBadge).not.toBeDisplayed()
+//     })
 
-    describe('when menu is open', () => {
+// //YC01
+//     it('should navigate to the Your Cart page when the cart icon is clicked', async() => {
+//         await ProductsPage.startCart()
+//         await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//     })
 
-        beforeEach(async() => {
-            await ProductsPage.viewBurgerMenu()
-            await expect(ProductsPage.cardMenu).toBeDisplayed()
-        })
+// //YC02
+//     it('', async() => {
+//         await ProductsPage.startCart()
+//         await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//     })
 
-//BM02
-        it('should not close when empty space outside the menu is clicked', async () => {
-            await ProductsPage.startLogo()
-            await expect(ProductsPage.cardMenu).toBeDisplayed()
-        })
-//BM03
-        it('should close when a link outside the menu is clicked', async () => {
+// //YC03
+//     it('', async() => {
+//         await ProductsPage.startCart()
+//         await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//     })
+// 
+//YC04
+    for (const product of ProductsPage.listProducts) {
+        it(`blah for ${product}`, async() => {
+            await expect(ProductsPage.visualCartBadge).not.toBeDisplayed()
+            await ProductsPage.startAddToCart(product)
+            await expect(buttonAddToCart(product)).not.toBeDisplayed()
+            await expect(buttonRemove(product)).toBeDisplayed()
+            await expect(ProductsPage.visualCartBadge(ProductsPage.listProducts[product++])).toBeDisplayed()
             await ProductsPage.startCart()
-            await expect(YourCartPage.titleYourCart).toBeDisplayed()
-            await expect(ProductsPage.cardMenu).not.toBeDisplayed()
+            await expect(YourCartPage.cardProduct).toBeDisplayed()
+            await YourCartPage.startContinueShopping()
         })
-//BM05
-        it('should navigate to saucelabs.com when About is clicked', async () => {
-/////////////////////
-        })
+    }
 
-//BM06
-        it('should navigate to the Login page when Logout is clicked', async() => {
-//Should there be another check to make sure the user is logged out? That's what the test case says, but... how would that happen and is it necessary?
-        })
+// //YC05
+//     it('', async() => {
+        
+//     })
 
-//BM08
-        it('should dismiss the menu when the X is clicked', async() => {
-/////////////////////
-        })
+//     describe('when menu is open', () => {
 
-    })
+//         beforeEach(async() => {
+//             await ProductsPage.viewBurgerMenu()
+//             await expect(ProductsPage.cardMenu).toBeDisplayed()
+//         })
 
-})
+// //BM02
+//         it('should not close when empty space outside the menu is clicked', async () => {
+//             await ProductsPage.startLogo()
+//             await expect(ProductsPage.cardMenu).toBeDisplayed()
+//         })
+// //BM03
+//         it('should close when a link outside the menu is clicked', async () => {
+//             await ProductsPage.startCart()
+//             await expect(YourCartPage.titleYourCart).toBeDisplayed()
+//             await expect(ProductsPage.cardMenu).not.toBeDisplayed()
+//         })
+// //BM05
+//         it('should navigate to saucelabs.com when About is clicked', async () => {
+//             await ProductsPage.startAbout()
+//             await expect(browser).toHaveUrl(expect.stringContaining('saucelabs.com'))
+//         })
 
-describe('Your Cart', () => {
-    
+// //BM06
+//         it('should navigate to the Login page when Logout is clicked', async() => {
+//             await ProductsPage.startLogout()
+//             await expect(LoginPage.buttonLogin).toExist()
+//         })
+
+// //BM08
+//         it('should dismiss the menu when the X is clicked', async() => {
+//             await ProductsPage.startBurgerMenuExit()
+//             await expect(ProductsPage.cardMenu).not.toBeDisplayed()
+//         })
+
+    // })
+
 })
 
 // describe('Login application', () => {
